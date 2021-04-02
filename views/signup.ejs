@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body style="background-color:#eaeaea">
+
+
+  <div class="container mt-5">
+    <h1 style="margin-left:25%;">Signup</h1>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-body">
+
+            <!-- Makes POST request to /login route -->
+            <form action="/register" method="POST" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password">
+              </div>
+              <div class="form-group">
+                <label for="info">Info</label>
+                <input type="text" class="form-control" name="info">
+              </div>
+              <div class="form-group lbl" >
+                <label for="exampleFormControlFile1">Profile Image</label>
+                <input type="file"  class="form-control-file" id="exampleFormControlFile1" name="pic">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Type</label> <br />
+                <select style="width:120px;"  class="custom-select" id="inputGroupSelect03" name="type">
+                  <option value="0">Admin</option>
+                <option value="1">Employer</option>
+                <option value="2">Student</option>
+                <option value="3">Tutor</option>
+                </select>
+              </div>
+              <button type="submit" style="margin-left:40%;" class="btn btn-dark">Signup</button>
+            </form><br>
+            <a style="margin-left:30%;" href="./login">Already have an account?Signin.</a>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</body>
+</html>

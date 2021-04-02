@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article</title>
+</head>
+<body>
+    <h1><%= article.title %></h1>
+    Approvd : <% if(article.approved == 1){ %>
+                    <h3>Done</h3>
+    <%} else{%>
+        <h3>Pending</h3>
+    <%}%>
+    <br>
+    <h5><%= article.content %></h5>
+<br><br>
+    <!--  Give button to view who all liked -->
+
+    <h3>Comments</h3>
+      <div>
+          <% for(let i=0;i<article.comments.length;i++){ %>
+                <div>
+
+                    <!-- comments   -->
+
+                </div>
+         <% } %>
+      </div>
+</body>
+</html>

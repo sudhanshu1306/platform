@@ -1,0 +1,56 @@
+<%- include('header.ejs') %>
+<div style="width:50%;margin-left:20%;margin-top:5%;">
+  <div style="display:flex;position:relative;">
+    <h3>All Courses</h3>
+    <h3 style="margin-left:25%"><%= courses.length %> courses found</h3>
+    <a href="/viewAddCourse">  <button type="button" class="btn btn-outline-primary" style="position:absolute;right:0;" name="button">Add course</button> </a>
+  </div>
+  <br>
+  <hr style="height:2px;border-width:2%;color:gray;background-color:gray">
+
+    <% for(let i=0;i<courses.length;i++){ %>
+      <div class="card" style="width: 18rem; margin-left:25%">
+      <div class="card-body">
+      <h5 class="card-title"><%= courses[i].title %></h5>
+      <h6 class="card-subtitle mb-2 text-muted">Course</h6>
+      <p class="card-text"><%= courses[i].info %></p>
+      <p class="card-text">Author:- <%= courses[i].author.name %></p>
+      <p class="card-text">Registered:- <%= courses[i].registered.length %> users</p>
+      <div style="display:flex;position:relative;">
+      <form action="getLessons" method="POST">
+       <input type="text" name="id" value="<%= courses[i]._id %>" hidden>
+       <button class="btn btn-outline-primary" type="submit">Lessons</button>
+      </form>
+      <form action="registerForCourse" method="POST">
+       <input type="text" name="id" value="<%= courses[i]._id %>" hidden>
+       <button class="btn btn-outline-primary" type="submit" style="position:absolute;right:0;">Register</button>
+      </form>
+    </div>
+
+</div>
+</div>
+<br>
+         <!-- <div>
+             Title : <%= courses[i].title %> <br>
+             Info : <%= courses[i].info %><br>
+             Author : <%= courses[i].author.name %><br>
+             Rgistered: <%= courses[i].registered.length %> <br>
+             <form action="getLessons" method="POST">
+                 <input type="text" name="id" value="<%= courses[i]._id %>" hidden>
+                 <button type="submit">View all Lessons</button>
+             </form>
+             <br>
+             <form action="registerForCourse" method="POST">
+                 <input type="text" name="id" value="<%= courses[i]._id %>" hidden>
+                 <button type="submit">Register</button>
+             </form>
+         </div>
+         <br><br> -->
+   <% } %>
+ </div>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+
+<%- include('header.ejs') %>
+<div style="width:50%;margin-left:20%;margin-top:4%;">
+
+    <div>
+        <!-- Name : <%= user.name %> <br>
+        Email : <%= user.email %> <br> -->
+        <div class="" style="display:flex;position:relative;">
+        <% if(user.profileImage){ %>
+        <div style="width:6.5vw;height:14vh;margin-left:5%">
+          <img src="../<%= user.profileImage %>" alt="Profile Pic" style="border-radius:50%;width:6.5vw;height:14vh;margin-left:5%" >
+        </div>
+        <% } %>
+        <h4 style="position:absolute;margin-left:30%;margin-top:1.5%;"><%= user.name %></h4>
+        <a style="position:absolute;margin-left:60%;" class="nav-link " href="../editUser"><button type="button" class="btn btn-outline-primary" name="button">Edit Profile</button></a>
+        <h4 style="position:absolute;margin-left:30%;margin-top:7%;"><%= user.jobs.length %> jobs</h4>
+        <h4 style="position:absolute;margin-left:40%;margin-top:7%;"><%= user.articles.length %> articles</h4>
+        <h4 style="position:absolute;margin-left:55%;margin-top:7%;"><%= user.courses.length %> courses</h4>
+      </div>
+        <br>
+    </div>
+    <div>
+      <br>
+      <% if(user.type==0){ %>
+      <a href="adminJobs"><button type="button" class="btn btn-outline-primary" name="button">Approve jobs as admin</button></a>
+      <a href="adminArticles"><button type="button" class="btn btn-outline-primary" name="button">Approve articles as admin</button></a>
+      <a href="adminVideos"><button type="button" class="btn btn-outline-primary" name="button">Approve videos as admin</button></a>
+      <br>
+      <br>
+      <% }%>
+      <div style="margin-left:5%;">
+        <div style="display:flex;position:relative;">
+            <h2>Jobs</h2> <h5>  <button onclick="showReply(0)" style="margin-left:5%;margin-top:1%;border:none;position:absolute;" type="button"><i class="bi bi-arrow-down-right-square"></i></button></h5>
+        </div>
+        <div id="reply0" class="hideReply">
+          <% for(let i=0;i<user.jobs.length;i++){ %>
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><%= user.jobs[i].title %> </h5>
+                <h6 class="card-subtitle mb-2 text-muted">Job</h6>
+                <div style="display:flex;position:relative;">
+                <% if(String(user.jobs[i].employer) === String(logged._id)){ %>
+                    <form action="editJob" method="POST">
+                        <input name="id" type="text" value="<%= user.jobs[i]._id %>" hidden>
+                        <button  class="btn btn-outline-primary card-link" type="submit">Edit Job</button>
+                    </form>
+                <% } %>
+
+                    <a style="text-decoration:none;" href="/viewJob/<%= user.jobs[i]._id %>"><button class="btn btn-outline-primary card-link " style="position:absolute;right:0;" type="submit">View Job</button></a>
+
+                 </div>
+
+              </div>
+            </div>
+            <br>
+
+         <% } %>
+
+        </div>
+
+         <div style="display:flex;position:relative;">
+             <h2>Articles</h2> <h5>  <button onclick="showReply(1)" style="margin-left:5%;margin-top:1%;border:none;position:absolute;" type="button"><i class="bi bi-arrow-down-right-square"></i></button></h5>
+         </div>
+         <div id="reply1" class="hideReply">
+           <% for(let i=0;i<user.articles.length;i++){ %>
+             <div class="card" style="width: 18rem;">
+               <div class="card-body">
+                 <h5 class="card-title"><%= user.articles[i].title %></h5>
+                 <h6 class="card-subtitle mb-2 text-muted">Article</h6>
+                 <div style="display:flex;position:relative;">
+                 <% if(String(user.articles[i].author) === String(logged._id)){ %>
+                   <form action="editarticle" method="POST">
+                       <input name="id" type="text" value="<%= user.articles[i]._id %>" hidden>
+                       <button class="btn btn-outline-primary card-link " type="submit">Edit Article</button>
+                   </form>
+                 <% } %>
+
+                      <a style="text-decoration:none;" href="/article/<%= user.articles[i]._id %>"> <button class="btn btn-outline-primary card-link " style="position:absolute;right:0;" type="submit">View Article</button></a>
+                  </div>
+
+               </div>
+             </div>
+             <br>
+
+           <%}%>
+
+         </div>
+
+         <div style="display:flex;position:relative;">
+             <h2>Courses</h2> <h5>  <button onclick="showReply(2)" style="margin-left:5%;margin-top:1%;border:none;position:absolute;" type="button"><i class="bi bi-arrow-down-right-square"></i></button></h5>
+         </div>
+         <div id="reply2" class="hideReply">
+           <% for(let i=0;i<user.courses.length;i++){ %>
+             <div class="card" style="width: 18rem;">
+               <div class="card-body">
+                 <h5 class="card-title"><%= user.courses[i].title %></h5>
+                 <h6 class="card-subtitle mb-2 text-muted">Course</h6>
+                 <div style="display:flex;position:relative;">
+
+                      <a style="text-decoration:none;" href="/viewCourse/<%= user.courses[i]._id %>"> <button class="btn btn-outline-primary card-link "  type="submit">View Course</button></a>
+                  </div>
+
+               </div>
+             </div>
+             <br>
+
+           <%}%>
+
+         </div>
+       </div>
+       <br>
+       <br>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+    function showReply(i){
+      if(document.getElementById("reply"+i).className.toString().split(/\s+/).indexOf("hideReply")!==-1)
+      document.getElementById("reply"+i).classList.remove("hideReply");
+      else
+        document.getElementById("reply"+i).classList.add("hideReply");
+    }
+</script>
+</body>
+</html>

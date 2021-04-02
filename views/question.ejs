@@ -1,0 +1,89 @@
+<%- include('header.ejs') %>
+<div style="width:50%;margin-left:20%;margin-top:5%;">
+  <div style="display:flex;position:relative;">
+    <h3>All Questions</h3>
+    <h3 style="margin-left:25%"><%= questions.length %> questions found</h3>
+    <a href="/viewAddQuestion">  <button type="button" class="btn btn-outline-primary" style="position:absolute;right:0;" name="button">Add question</button> </a>
+  </div>
+  <br>
+  <hr style="height:2px;border-width:2%;color:gray;background-color:gray">
+
+
+        <% for(let i = 0;i<questions.length;i++){ %>
+          <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content" style="width:50%;">
+              <span class="close">&times;</span>
+               <% for(var k=0;k<questions[i].likes.length;k++) { %>
+                 <div class="" style="display:flex;position:relative;">
+                   <div class="smallimg-div">
+                     <img class="small-img" src="http://localhost:3000/<%=questions[i].likes[k].profileImage%>" alt="https://localhost:3000/<%=questions[i].likes[k].profileImage%>">
+                   </div>
+                   <h6><%=questions[i].likes[k].name%>  </h6>
+                 </div>
+               <%}%>
+            </div>
+
+          </div>
+         <div class="card" style="width: 25rem; margin-left:25%">
+ <div class="card-body">
+  <h3 class="card-title"style="text-decoration:none;text-align:center;"><%= questions[i].title %></h3>
+  <h6 class="card-subtitle mb-2 text-muted" style="text-decoration:none;text-align:center;">Question</h6>
+  <p class="card-text"><%= questions[i].content %></p>
+  <div style="display:flex;position:relative;">
+  <form action="likeQuestion" method="POST">
+      <input type="text" name="id" value="<%= questions[i]._id %>" hidden>
+      <button type="submit" class="btn btn-outline-primary">Like</button>
+  </form>
+
+  <form action="getSpecificQuestion" method="POST">
+      <input type="text" name="id" value="<%= questions[i]._id %>" hidden>
+      <button type="submit" class="btn btn-outline-primary" style="position:absolute;right:0;"> Answers</button>
+  </form>
+ </div>
+ <h7 style="color:blue;cursor:pointer;" onclick="popup()"> Liked by <%= questions[i].likes.length%> users </h7>
+            <!-- <div>
+                title : <%= questions[i].title %> <br>
+                content : <%= questions[i].content %> <br>
+                tags :
+                 <% for(let j=0;j<questions[i].tags.length;j++){ %>
+                        <%= questions[i].tags[j] %> ,
+                <% } %>
+                <br>
+                likes : <%= questions[i].likes.length %> <br>
+                <form action="getSpecificQuestion" method="post">
+                    <input type="text" value="<%= questions[i]._id %>" name="id" hidden>
+                    <button type="submit">View Thread</button>
+                </form>
+            </div>
+            <br><br> -->
+
+            </div>
+            </div>
+            <br>
+        <% } %>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+  var modal = document.getElementById("myModal");
+  var span = document.getElementsByClassName("close")[0];
+  function popup(){
+     modal.style.display = "block";
+  }
+  span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>

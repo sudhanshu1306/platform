@@ -1,0 +1,53 @@
+<%- include('header.ejs') %>
+<div style="width:50%;margin-left:20%;margin-top:3%;">
+      <% for(let i=0;i<videos.length;i++){ %>
+        <%  if(videos[i]){ %>
+          <div class="card" style="width: 25rem; margin-left:25%">
+  <div class="card-body">
+   <h3 style="text-decoration:none;text-align:center;" class="card-title" > <%= videos[i].title %></h3>
+   <h6 class="card-subtitle mb-2 text-muted" style="text-decoration:none;text-align:center;">Video</h6>
+   <p class="card-text"><%= videos[i].content %></p>
+
+   <div style="display:flex;position:relative;">
+   <form action="adminVideos" method="post">
+       <input type="text" name="id" value="<%= videos[i]._id %>" hidden>
+       <button type="submit" name="val" value="no" class="btn btn-outline-danger">Cancel</button>
+   </form>
+   <form action="getVideoEJS" method="POST">
+     <input type="text" name="id" value="<%= videos[i]._id %>" hidden>
+     <button class="btn btn-outline-primary" type="submit" style="position:absolute;right:35%;">View Video</button>
+   </form>
+   <form action="adminVideos" method="post">
+       <input type="text" name="articleId" value="<%= videos[i]._id %>" hidden>
+       <button type="submit" name="val" value="true" class="btn btn-outline-primary" style="position:absolute;right:0;"> Approve</button>
+   </form>
+  </div>
+
+  </div>
+  </div>
+  <br>
+          <!-- <div>
+
+              title : <%= videos[i].title %> <br>
+              content : <%= videos[i].content %> <br>
+              <form action="getVideoEJS" method="POST">
+                <input type="text" name="id" value="<%= videos[i]._id %>" hidden>
+                <button type="submit">View Video</button>
+              </form>
+              <br>
+              <form action="adminVideos" method="post">
+                  <input type="text" name="id" value="<%= videos[i]._id %>" hidden>
+                  <button type="submit" name="val" value="no">Cancel</button>
+                  <button type="submit" name="val" value="true">Approve</button>
+              </form>
+              </div>
+              <br><br> -->
+         <% } %>
+
+     <% } %>
+   </div>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   </body>
+   </html>

@@ -1,0 +1,59 @@
+<%- include('header.ejs') %>
+<div style="width:50%;margin-left:20%;margin-top:5%;">
+  <div style="display:flex;position:relative;">
+    <h3>All lessons</h3>
+    <h3 style="margin-left:25%"><%= lessons.length %> lessons found</h3>
+    <a href="/viewAddLesson/<%=id%>">  <button type="button" class="btn btn-outline-primary" style="position:absolute;right:0;" name="button">Add lesson</button> </a>
+  </div>
+  <br>
+  <hr style="height:2px;border-width:2%;color:gray;background-color:gray">
+
+    <% for(let i=0;i<lessons.length;i++){ %>
+      <div class="card" style="width: 18rem; margin-left:25%">
+      <div class="card-body">
+      <div style="display:flex;position:relative;">
+      <h5 class="card-title"><%= lessons[i].title %></h5>
+      <h5 style="position:absolute;right:0;"><a style="text-decoration:none;color:blue;"href="/viewAddVideo/<%= lessons[i]._id %>">Add videos</a> </h5>
+      </div>
+      <h6 class="card-subtitle mb-2 text-muted">videos</h6>
+
+      <% for(let j=0;j<lessons[i].videos.length;j++) { %>
+           <% if(lessons[i].videos[j] && lessons[i].videos[j].approved == 1){ %>
+      <p class="card-text"><%= (j+1) +")"+ lessons[i].videos[j].title %> </p>
+      <p class="card-text">      <%= lessons[i].videos[j].content %></p>
+      <div style="display:flex;position:relative;">
+      <form action="getVideoEJS" method="POST">
+       <input type="text" name="id" value="<%= lessons[i].videos[j]._id %>" hidden>
+       <input type="text" name="idCourse" value="<%=id %>" hidden>
+       <button class="btn btn-outline-primary" type="submit">View Video</button>
+      </form>
+    </div>
+      <hr style="height:2px;border-width:2%;color:gray;background-color:gray">
+
+
+    <% } %>
+
+ <%}%>
+ </div>
+    </div>
+    <br>
+
+        <!-- <div style="margin: 5%;">
+            Add New Video <br>
+        <form action="postVideo" method="POST" enctype="multipart/form-data">
+            Title : <input type="text" name="title"> <br>
+            Content : <input type="text" name="content"> <br>
+             <input type="text" name="id" value="<%= lessons[i]._id %>"  hidden>
+            Video : <input type="file" name="video"> <br>
+            <button type="submit">Add new Video</button>
+        </form>
+        </div>
+        <br><br><br> -->
+  <% } %>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

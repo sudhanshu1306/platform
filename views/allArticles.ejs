@@ -1,0 +1,90 @@
+<%- include('header.ejs') %>
+<div style="width:50%;margin-left:20%;margin-top:5%;">
+  <div style="display:flex;position:relative;">
+    <h3>All Articles</h3>
+    <h3 style="margin-left:25%"><%= articles.length %> articles found</h3>
+    <a href="/viewAddArticle">  <button type="button" class="btn btn-outline-primary" style="position:absolute;right:0;" name="button">Add article</button> </a>
+  </div>
+  <br>
+  <hr style="height:2px;border-width:2%;color:gray;background-color:gray">
+
+    <% for(let i=0;i<articles.length;i++){ %>
+
+       <% if(articles[i]){ %>
+
+         <div id="myModal" class="modal">
+
+           <!-- Modal content -->
+           <div class="modal-content" style="width:50%;">
+             <span class="close">&times;</span>
+              <% for(var k=0;k<articles[i].likes.length;k++) { %>
+                <div class="" style="display:flex;position:relative;">
+                  <div class="smallimg-div">
+                    <img class="small-img" src="http://localhost:3000/<%=articles[i].likes[k].profileImage%>" alt="https://localhost:3000/<%=articles[i].likes[k].profileImage%>">
+                  </div>
+                  <h6><%=articles[i].likes[k].name%>  </h6>
+                </div>
+              <%}%>
+           </div>
+
+         </div>
+        <div class="card" style="width: 25rem; margin-left:25%">
+<div class="card-body">
+ <a style="text-decoration:none;text-align:center;"href="/article/<%=articles[i]._id%>"><h3 class="card-title" ><%= articles[i].title %></h3></a>
+ <h6 style="text-decoration:none;text-align:center;" class="card-subtitle mb-2 text-muted" style="margin-left:40%;">Article</h6>
+ <p class="card-text"><%= articles[i].content %></p>
+ <div style="display:flex;position:relative;">
+ <form action="likeArticle" method="POST">
+     <input type="text" name="articleId" value="<%= articles[i]._id %>" hidden>
+     <button type="submit" class="btn btn-outline-primary">Like</button>
+ </form>
+
+ <form action="getComment" method="POST">
+     <input type="text" name="articleId" value="<%= articles[i]._id %>" hidden>
+     <button type="submit" class="btn btn-outline-primary" style="position:absolute;right:0;"> Comments</button>
+ </form>
+</div>
+<h7 style="color:blue;cursor:pointer;" onclick="popup()"> Liked by <%= articles[i].likes.length%> users </h7>
+<!-- <form action="postComment" method="POST">
+    Post Comment <br>
+    Comment : <input type="text" name="content"> <br>
+    <input type="text" name="articleId" value="<%= articles[i]._id %>" hidden>
+    <button type="submit">Post</button>
+</form> -->
+<form class="form-inline" action="postComment" method="POST">
+  <label class="sr-only" for="inlineFormInputName2" style="margin-left:30%;">Add Comment</label>
+   <textarea class="form-control mb-2 mr-sm-2" name="content" id="inlineFormInputName2" rows="3"></textarea>
+  <input type="text" class="form-control mb-2 mr-sm-2" name="articleId" value="<%= articles[i]._id %>" id="inlineFormInputName2" placeholder="Jane Doe" hidden>
+
+  <button type="submit" class="btn btn-outline-primary mb-2" style="margin-left:30%;">Comment</button>
+</form>
+
+</div>
+</div>
+<br>
+       <% } %>
+
+  <% } %>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+<script type="text/javascript">
+  var modal = document.getElementById("myModal");
+  var span = document.getElementsByClassName("close")[0];
+  function popup(){
+     modal.style.display = "block";
+  }
+  span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</html>
